@@ -1,0 +1,35 @@
+#
+# Boot shim and boot image configuration for the OPPO R11 (r11, SDM660).
+#
+# Values are read by "unixnu build firmware" (uefi_fd) and "unixnu bootimg"
+# (boot_shim, boot_image*). Keep base and size identical to the FD section of
+# Platforms/OPPO/r11Pkg/r11.dsc: BootShim compiles them in.
+#
+# 0x9FC00000 / 0x00300000 is not a guess: the stock R11 XBL reserves exactly
+# this window for "UEFI FD" in its own platform configuration, together with
+# "DXE Heap" at 0x94000000 (0x09400000) and "UEFI Stack" at 0x9FF90000
+# (0x40000). Those strings come from xbl.elf in the OFP package.
+#
+
+[boot_shim]
+requires_kernel_header = true
+
+[uefi_fd]
+base = 0x9FC00000
+size = 0x00300000
+
+[boot_image_kernel]
+kernel_compression = "gzip"
+append_dtb = true
+
+[boot_image]
+# Stock OPPO boot.img (header version 0) from the OFP package:
+#   kernel 0x00008000, ramdisk 0x01000000, tags 0x00000100, second 0x00f00000,
+#   page size 4096. OPPO's tags offset is 0x100, not the usual 0x1e00000.
+header_version = 0
+base = 0x0
+kernel_offset = 0x8000
+ramdisk_offset = 0x1000000
+tags_offset = 0x100
+second_offset = 0xf00000
+pagesize = 4096

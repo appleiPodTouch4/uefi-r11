@@ -1,0 +1,9 @@
+##
+#  OPPO R11 (r11) platform package.
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = r11Pkg
+  PACKAGE_GUID                   = 2A6E9B8C-3F41-4A5D-8E92-7B4C1D0F5A63
+  PACKAGE_VERSION                = 0.1
